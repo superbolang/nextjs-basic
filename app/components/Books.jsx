@@ -2,15 +2,16 @@
 import { useState, useEffect } from 'react';
 import LoadingPage from '../loading';
 import AddBook from './AddBook';
+import EditBook from './EditBook';
 
 import Link from 'next/link';
 
-async function getBooks() {
-  const res = fetch('http://localhost:3000/api/books');
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  const json = (await res).json();
-  return json;
-}
+// async function getBooks() {
+//   const res = fetch('http://localhost:3000/api/books');
+//   await new Promise((resolve) => setTimeout(resolve, 2000));
+//   const json = await res.json();
+//   return json;
+// }
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -21,6 +22,8 @@ const Books = () => {
 
   const fetchBooks = async () => {
     const res = await fetch('/api/books');
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     const books = await res.json();
     setBooks(books);
     setLoading(false);
@@ -47,6 +50,7 @@ const Books = () => {
     });
     fetchBooks();
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -71,6 +75,7 @@ const Books = () => {
               <button onClick={() => deleteBook(book.id)} className='btn btn-error'>
                 Delete
               </button>
+              <EditBook refreshBooks={fetchBooks} id={book.id} />
             </div>
           </div>
         </div>

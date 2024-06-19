@@ -37,7 +37,7 @@ const AddBook = ({ refreshBooks }) => {
             ✕
           </button>
           <h3 className='font-bold text-lg'>Add New Book</h3>
-          <input type='text' value={newBookTitle} onChange={(e) => setNewBookTitle(e.target.value)} placeholder='Enter new book title' className='input input-bordered w-full max-w-xs' />
+          <input type='text' value={newBookTitle} onChange={(e) => setNewBookTitle(e.target.value)} placeholder='Enter new book title' className='input input-bordered w-full max-w-xs' required />
           <button type='submit' className='btn btn-primary'>
             Add Book
           </button>
